@@ -1,0 +1,16 @@
+@import url("http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+
+
+.game-form textarea, .post-form input {
+    width: 100%;
+}
+
+
+
+.game {
+    margin-bottom: 70px;
+}
+
+.game h1 a, .post h1 a:visited {
+    color: #000000;
+}

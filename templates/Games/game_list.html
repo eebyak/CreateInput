@@ -1,0 +1,44 @@
+{% extends 'Games/base.html' %}
+
+{% block content %}
+
+
+
+    <h2>Game Listing: </h2>
+
+{#        <a href="{% url 'game_edit' pk=game.id %}" class="top-menu"><span class="glyphicon glyphicons-edit"></span></a>#}
+
+
+
+    <div class="post">
+
+<table class="table table-condensed">
+
+
+    <tbody>
+
+    {%  for game in games %}
+        <tr>
+            <td>
+                {{ game.name }}
+            </td>
+            <td>
+                {{ game.type.name }}
+            </td>
+            <td>
+                <a href="{% url 'game_edit' pk=game.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+        </tr>
+    {%  endfor %}
+
+    </tbody>
+
+
+</table>
+
+    </div>
+
+
+
+{% endblock %}
+

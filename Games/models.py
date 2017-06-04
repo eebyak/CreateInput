@@ -11,10 +11,10 @@ import json
 
 class GameType(models.Model):
     name = models.CharField(max_length=200,default='')
-    description = models.TextField('Missing Description')
-    linguistic_rule_input = models.ForeignKey('Linguistics.LinguisticRule', related_name='input')
-    linguistic_rule_output = models.ForeignKey('Linguistics.LinguisticRule', related_name='output')
-    linguistic_rule_question = models.ForeignKey('Linguistics.LinguisticQuestion')
+    description = models.TextField(default='Missing Description')
+    linguistic_rule_input = models.ForeignKey('Linguistics.LinguisticRule', related_name='input',null=True)
+    linguistic_rule_output = models.ForeignKey('Linguistics.LinguisticRule', related_name='output', null=True)
+    linguistic_rule_question = models.ForeignKey('Linguistics.LinguisticQuestion', null=True)
 
     def __str__(self):
        return self.name
@@ -27,3 +27,5 @@ class Game(models.Model):
     def __str__(self):
        return self.name
 
+    def get_plain(self):
+        return self

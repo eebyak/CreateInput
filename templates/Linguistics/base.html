@@ -1,5 +1,4 @@
 
-
 {% extends 'base.html' %}
 
 
@@ -10,14 +9,34 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="{{ settings.BASE_DIR }}/Input/">Home</a>
+      <a class="navbar-brand" href="{{ settings.BASE_DIR }}/Linguistics/">Manage Linguistic Rules</a>
     </div>
     <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ settings.BASE_DIR }}/Linguistics/">Create Linguistic Rules</a></li>
-
+      <li class="active"><a href="{{ settings.BASE_DIR }}/Linguistics/">Manage Linguistic Rules</a></li>
 {#      <li><a href="/">Top</a></li>#}
 
     </ul>
   </div>
 </nav>
+
+
+
+
+
+
+<body>
+<div class="page-header">
+    <h1><a href="/">Manage Linguistic Rules</a></h1>
+</div>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+
+{% endblock allcontent %}
 
