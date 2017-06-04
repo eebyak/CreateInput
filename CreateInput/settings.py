@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'Input.apps.InputConfig',
     'Database.apps.DatabaseConfig',
     'Wordout.apps.WordoutConfig',
+    'Games.apps.GamesConfig',
+    'Linguistics.apps.LinguisticsConfig',
 ]
 
 MIDDLEWARE = [

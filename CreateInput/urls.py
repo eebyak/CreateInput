@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^Input/', include('Input.urls')),
     url(r'^Database/', include('Database.urls')),
     url(r'^Wordout/', include('Wordout.urls')),
+    url(r'^Games/',include('Games.urls')),
+    url(r'^Linguistics/',include('Linguistics.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 

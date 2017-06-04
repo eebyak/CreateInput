@@ -6,7 +6,9 @@
   <li class="active"><a href="{{ settings.BASE_DIR }}/Input/">Home</a></li>
   <li><a href="{{ settings.BASE_DIR }}/Input/">Linguistic Input</a></li>
   <li><a href="{{ settings.BASE_DIR }}/Database/">Dictionary Input</a></li>
-  <li><a href="{{ settings.BASE_DIR }}/Wordout">Generate Output</a></li>
+  <li><a href="{{ settings.BASE_DIR }}/Wordout/">Generate Output</a></li>
+  <li><a href="{{ settings.BASE_DIR }}/Games/">Games</a></li>
+  <li><a href="{{ settings.BASE_DIR }}/Linguistics/">Manage Rules</a></li>
 </ul>
 
 <head>
@@ -23,9 +25,8 @@
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
 {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static '/Input/css/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static '/Database/css/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static '/Wordout/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'Input/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'Database/css/style.css' %}" />
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

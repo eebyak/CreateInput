@@ -1,0 +1,42 @@
+
+{% extends 'Database/base.html' %}
+
+
+
+{% block content %}
+
+
+
+    {% if messages %}
+        <ul class="messages">
+            {% for msg in messages %}
+                <li>
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                        {{msg.message}}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+<h2>Games are here</h2>
+
+    <div class="post">
+
+
+
+        <p>
+            These are the games and their input.
+        </p>
+
+
+
+     </div>
+
+
+
+
+
+{% endblock content %}
+
