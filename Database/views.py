@@ -10,7 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.forms.models import model_to_dict
 
-from forms import testForm, entryForm
+from forms import  entryForm
 
 from .models import Entry, Dictionary
 

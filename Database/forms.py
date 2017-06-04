@@ -1,6 +1,5 @@
 from django import forms
 from Database.models import Entry
-from splitjson.widgets import SplitJSONWidget
 from django.forms import ModelForm
 
 class entryForm(forms.ModelForm):
@@ -14,10 +13,6 @@ class entryForm(forms.ModelForm):
             'ph',
         )
 
-
-class testForm(forms.Form):
-    attrs = {'class': 'special', 'size': '40'}
-    data = forms.CharField(widget=SplitJSONWidget(attrs=attrs, debug=True))
 
 
 # class AuthorForm(ModelForm):
