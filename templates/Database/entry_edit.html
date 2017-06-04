@@ -1,0 +1,35 @@
+
+{% extends 'Database/base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+
+    <h1>New Entry</h1>
+    
+    <form method="POST" class="post-form">{% csrf_token %}
+
+
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Label</th>
+                <th>Content</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {{ form.as_table }}
+            </tbody>
+
+        </table>
+
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+</div>
+
+{% endblock %}
+

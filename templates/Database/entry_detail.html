@@ -1,0 +1,19 @@
+{% extends 'Database/base.html' %}
+
+{% block content %}
+
+
+
+    <h2>Details: </h2>
+
+    <div class="post">
+
+        <a class="btn btn-default" href="{% url 'entry_edit' pk=entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h1>{{ entry.word }}</h1>
+        <p>{{ entry.gr|linebreaksbr }}</p>
+
+    </div>
+
+{% endblock %}
+
+

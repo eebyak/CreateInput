@@ -1,0 +1,37 @@
+
+
+{% extends 'Input/base.html' %}
+
+<div class="post">
+
+    {% block content %}
+
+
+
+
+        <h2>
+            Showing Current Values for this Item:
+        </h2>
+        {{ question.question_text }}
+
+
+        <table style="width:100%">
+            <tr>
+                <th>Choice</th>
+                <th>Results</th>
+            </tr>
+
+            {% for choice in choices %}
+                <tr>
+                    <td>{{ choice.choice_test }}</td>
+                    <td>{{ choice.votes }}</td>
+                </tr>
+            {%  endfor %}
+
+        </table>
+    {% endblock content %}
+
+</div>
+
+
+

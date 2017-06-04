@@ -1,0 +1,48 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block allcontent %}
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ settings.BASE_DIR }}/Input/">Home</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="{{ settings.BASE_DIR }}/Database/">Upload Database</a></li>
+        <li class="active"><a href="{{ settings.BASE_DIR }}/Database/post_list/">List Database</a></li>
+        <li class="active"><a target="_dictionary" href="{{ settings.BASE_DIR }}/Database/write/">Export Database</a></li>
+
+{#      <li><a href="/">Top</a></li>#}
+
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+<body>
+<div class="page-header">
+    <h1><a href="/">Current User Model - Dictionary</a></h1>
+</div>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+
+{% endblock allcontent %}
+
+
+

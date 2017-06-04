@@ -1,0 +1,87 @@
+
+{% extends 'Database/base.html' %}
+
+{% block content %}
+
+
+
+<SCRIPT LANGUAGE="JavaScript">
+    function testResults (form,KEY) {
+        var TestVar = form.inputbox.value;
+        var myObj = {{ contentOfFile|safe  }};
+        myObj[KEY] = TestVar;
+        alert ("Saving new content (" + TestVar + ") to JSON file at Value: " + KEY + {{ contentOfFile }} + myObj[KEY]) ;
+    }
+    function writeText (form) {
+        form.inputbox.value = form.inputbox.value;
+    }
+</SCRIPT>
+
+    <script>
+        $('changeButton').click(function(){
+            $('#preview').html(this.val());
+        });
+    </script>
+
+
+    <div class="post">
+
+
+        <h2>Content as Array.</h2>
+        <p>Content written as an JSON array will be converted into a JavaScript array.</p>
+
+        <h3>File {{file.name}} uploaded successfully</h3>
+
+        </br>
+       {% comment %}
+       content = {{contentOfFile}}
+        </br>
+
+        content = {{ data }}
+        </br>
+
+        version = {{ data.version }}
+        </br>
+        {% endcomment %}
+
+        <p id="demo"></p>
+
+
+
+        <script>
+            var myObj = {{ contentOfFile|safe  }};
+            for (key in myObj) {
+                value = myObj[key]
+                document.getElementById("demo").innerHTML += "Key: " + key + "    Value: " + myObj[key] + "<br>";
+            }
+        </script>
+
+        <p>This is a paragraph.</p>
+        <p id="preview">This is another paragraph.</p>
+
+
+        {% for key in data %}
+
+            {{ key }}
+            {{ data}}
+
+            {{ data.key}}
+
+
+
+
+<FORM NAME="myform" ACTION="" METHOD="GET">You can change current value by editing and clicking on "Change" (no undo): <BR>
+    <INPUT TYPE="text" NAME="inputbox" VALUE="{{ data.key }}"><P>
+        <INPUT TYPE="button" NAME="button" Value="Change" onClick="testResults(this.form,key)">
+{#        <INPUT TYPE="button" NAME="button2" Value="bogus" onClick="writeText(this.form)">#}
+{#        <Button>bogus</Button>#}
+</FORM>
+
+
+        {% endfor %}
+
+
+    </div>
+
+{% endblock %}
+

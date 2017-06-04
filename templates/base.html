@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="{{ settings.BASE_DIR }}/Input/">Home</a></li>
+  <li><a href="{{ settings.BASE_DIR }}/Input/">Linguistic Input</a></li>
+  <li><a href="{{ settings.BASE_DIR }}/Database/">Dictionary Input</a></li>
+  <li><a href="{{ settings.BASE_DIR }}/Wordout">Generate Output</a></li>
+</ul>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Games Input</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static '/Input/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/Database/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/Wordout/css/style.css' %}" />
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+
+
+
+
+{% block allcontent %}
+{% endblock %}
+
+
+
+</html>

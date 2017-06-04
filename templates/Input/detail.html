@@ -1,0 +1,50 @@
+
+
+{% extends 'Input/base.html' %}
+
+{% block content %}
+
+    <div class="post">
+        <h1> Change Items by Clicking on Button Next to Item:  </h1>
+
+        {% comment %}<h1>
+            {{ question.id }}
+        </h1>{% endcomment %}
+
+        <h2>
+            {{ question.question_text }}
+        </h2>
+
+        {% comment %}<h3>
+            {{ question.pub_date }}: {{ question.was_published_recently }}
+        </h3>{% endcomment %}
+
+        <table align="center" style="width:100%">
+            <tr>
+                <th align="center">Choice</th>
+                <th>Vote Now</th>
+                <th>Results</th>
+            </tr>
+
+            {% for choice in choices %}
+                <tr>
+                    <td align="center">{{ choice.choice_test }}</td>
+                    <td>
+                        <form action="vote/" method="post">
+                            {% csrf_token %}
+                            <button name="choice" value="{{ choice.id }}">Upvote</button>
+                        </form>
+                    </td>
+                    <td>{{ choice.votes }}</td>
+                </tr>
+            {%  endfor %}
+
+        </table>
+    </div>
+
+
+
+{% endblock content %}
+
+
+

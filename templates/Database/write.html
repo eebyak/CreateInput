@@ -1,0 +1,28 @@
+{% extends 'Database/base.html' %}
+
+{% block content %}
+
+<script>
+var tmp = {{ jsonarray|safe  }}
+//setTimeout("create(tmp, 'myfile.txt', 'text/plain')");
+function create() {
+  var dlbtn = document.getElementById("dlbtn");
+  var file = new Blob([tmp], {type: 'application/json'})
+  //var file = new Blob([text], {type: type});
+  dlbtn.href = URL.createObjectURL(file);
+  dlbtn.download = 'myfile.json';
+}
+</script>
+
+
+    <h2>Write out to JSON file: </h2>
+
+
+result.json
+
+<a href="javascript:create()" id="dlbtn"><button class="save btn btn-default">click here to download your file</button></a>
+
+
+{% endblock %}
+
+

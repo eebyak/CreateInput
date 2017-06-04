@@ -1,0 +1,93 @@
+
+body {
+    padding-left: 15px;
+}
+
+
+h1 a {
+    color: #FCA205;
+    font-family: 'Lobster';
+}
+
+
+
+
+li a {
+color: #ff55b5;
+}
+
+h1 a {
+    color: #fc7499;
+}
+
+
+/* unvisited link */
+li a:link {
+    color: orange;
+}
+
+/* visited link */
+li a:visited {
+    color: greenyellow;
+}
+
+/* mouse over link */
+li a:hover {
+    color: hotpink;
+}
+
+/* selected link */
+li a:active {
+    color: dodgerblue;
+}
+
+
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+
+.post h1  {
+    color: #fcf762;
+    font-family: 'Lobster';
+}
+
+
+.post h2  {
+    color: #fc6433;
+    font-family: 'Lobster';
+}
+
+.post p  {
+    color: #869ffc;
+    font-family: 'Lobster';
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: #ff9400;
+}
+
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+   background-color:#fff;
+}
+table th {
+    background-color: #ff9400;
+    color: white;
+    font-size: x-large;
+}

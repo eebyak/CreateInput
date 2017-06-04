@@ -1,0 +1,63 @@
+
+{% extends 'Input/base.html' %}
+
+
+
+{% block content %}
+
+    <div class="post">
+    <h1> Here is the list of input we need from you: </h1>
+
+    <h2> Click on each one and answer the questions. </h2>
+
+    Afterwards, you will be able to test the word generation for each of the games.
+
+    <p></p>
+
+    {% if latest_question_list %}
+{#        <ul>#}
+        <table align="center" style="width:100%">
+
+        <tr>
+                <th>Question</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+
+            {% for question in latest_question_list %}
+{#                <li>#}
+
+                <tr>
+                    <td>
+                        {{ question.question_text }}
+                    </td>
+                    <td align="center">
+                        <a href="{% url 'results' question.id %}" class="btn btn-default">View</a>
+                    </td>
+                    <td align="center">
+                         <a href="{% url 'detail' question.id %}" class="btn btn-default">Change</a>
+                    </td>
+                </tr>
+
+
+
+
+
+{#                </li>#}
+
+            {% endfor %}
+        </table>
+{#        </ul>#}
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+
+
+    </div>
+
+
+{% endblock content %}
+
+
+

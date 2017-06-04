@@ -1,0 +1,42 @@
+
+
+{% extends 'Database/base.html' %}
+
+{% block content %}
+
+
+    <a href="{% url 'entry_new' pk=id %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
+    {{ id }}
+
+    <h2>Current Listing of Database (language = {{ d.language }}) </h2>
+
+
+    <table class="table table-condensed">
+
+
+        <tbody>
+
+        {%  for entry in entries %}
+            <tr>
+                <td>
+                    {{ entry.word }}
+                </td>
+                <td>
+                    {{ entry.ph }}
+                </td>
+                <td>
+                    {{ entry.gr }}
+                </td>
+                <td>
+                    {{ entry.CVC }}
+                </td>
+            </tr>
+        {%  endfor %}
+
+        </tbody>
+
+
+        </table>
+
+{% endblock %}

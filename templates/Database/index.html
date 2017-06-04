@@ -1,0 +1,52 @@
+
+{% extends 'Database/base.html' %}
+
+
+
+{% block content %}
+
+
+
+    {% if messages %}
+        <ul class="messages">
+            {% for msg in messages %}
+                <li>
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                        {{msg.message}}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+<h2>Upload Current JSON File</h2>
+
+    <div class="post">
+
+
+        <h1> Here is the list of input we need from you: </h1>
+        <h2> Click on each one and answer the questions. </h2>
+
+        <p>
+            Afterwards, you will be able to test the word generation for each of the games.
+        </p>
+
+
+
+        <form action="entry_list/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="myfile" />
+            <p>Click Upload to Use this Model:</p>
+            <input type="submit" name="submit" value="Upload" />
+        </form>
+
+
+     </div>
+
+
+
+
+
+{% endblock content %}
+
