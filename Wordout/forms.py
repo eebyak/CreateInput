@@ -16,7 +16,7 @@ class associateForm(forms.ModelForm):
         )
 
 
-
-
+class rulesForm(forms.Form):
+    rules = forms.ModelChoiceField(queryset=LinguisticRule.objects.all().order_by('name'))
 
 

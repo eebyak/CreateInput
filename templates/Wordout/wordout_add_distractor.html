@@ -1,0 +1,95 @@
+
+{% extends 'Wordout/base.html' %}
+
+
+
+{% block content %}
+
+    <div class="post">
+
+
+        <h2> Now its time to add the distractor </h2>
+        <ul>
+        <li> Game Type: "{{ gametype.name }}" <span class='glyphicon glyphicon-check' style="color:greenyellow"></span></li>
+        <li> Rule: "{{ rule.name }}" <span class='glyphicon glyphicon-check' style="color:greenyellow"></span></li>
+        <li> Distractor: "..." <span class='glyphicon glyphicon-cog' style="color:deepskyblue"></span></li>
+        <li> Question(s): "..." <span class='glyphicon glyphicon-question-sign' style="color:red"></span></li>
+        </ul>
+
+
+        <h2>Rule Details: </h2>
+        <p> Inputwords are formed according to this rule. </p>
+
+<table class="table table-condensed" width="200">
+    <tbody>
+        <tr>
+            <td>Word:</td>
+            <td>
+                {{ rule.word }}
+            </td>
+        </tr>
+        <tr>
+            <td>Graphemes</td>
+            <td>
+                {{ rule.gr }}
+            </td>
+        </tr>
+        <tr>
+            <td>Phonemes</td>
+            <td>
+                {{ rule.ph }}
+            </td>
+        </tr>
+        <tr>
+            <td>C-V-V Structure</td>
+            <td>
+                {{ rule.CVC }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+        <h2>Words that follow this rules: </h2>
+    <p>
+        If you don't like this go back (using browser backbutton to pick another rule.
+        If you need to create another rule, use another window on this app and create it there.
+        <br><br>
+        {{ num_entries }} entries in dictionary match the rules above (displaying max. 5).
+    </p>
+        <table class="table table-condensed">
+            <tbody>
+
+            {%  for entry in entries %}
+                <tr>
+                    <td>
+                        {{ entry.word }}
+                    </td>
+                    <td>
+                        {{ entry.ph }}
+                    </td>
+                    <td>
+                        {{ entry.gr }}
+                    </td>
+                    <td>
+                        {{ entry.CVC }}
+                    </td>
+                </tr>
+            {%  endfor %}
+
+            </tbody>
+        </table>
+
+
+        <h2>Now pick the rule according to which the distractors will be generated: </h2>
+    <p>If you need more rules then open another window with this application and created the rules there.</p>
+        <form action="" method="post">{% csrf_token %}
+            {{ rform.as_p }}
+            <input type="submit" value="Create" />
+        </form>
+
+
+    </div>
+
+{% endblock content %}
+

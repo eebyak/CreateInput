@@ -8,25 +8,31 @@
     <div class="post">
 
 
-        <h1> Add linguistic rules to this type of game </h1>
-        <h2> Game Type: "{{ gametype.name }}"</h2>
+        <h2> Now its time to add the rules to generate the answer candidate:  </h2>
+        <ul>
+        <li> Game Type: "{{ gametype.name }}" <span class='glyphicon glyphicon-check' style="color:greenyellow"></span></li>
+        <li> Rule: "{{ rule.name }}" <span class='glyphicon glyphicon-cog' style="color:deepskyblue"></span></li>
+        <li> Distractor: "..." <span class='glyphicon glyphicon-question-sign' style="color:red"></span></li>
+        <li> Question(s): "..." <span class='glyphicon glyphicon-question-sign' style="color:red"></span></li>
+        </ul>
 
-        <h3>Description</h3>
+
+        <h2>Description</h2>
         <p>
             {{ gametype.description }}
         </p>
 
-        <h3>Games in the category are: </h3>
+        <h2>Games in the category are: </h2>
         <ul>
             {% for game in games %}
                 <li>{{ game }}</li>
             {% endfor %}
         </ul>
 
-        <h3>Current rules that are associated: </h3>
+        <h2>Current rules that are associated: </h2>
         <p>There are/is currently {{ num_chosen_rules }} rule(s) associated to this type of game. </p>
 
-        <h3> Choose all that apply. </h3>
+        <h2> Choose all that apply. </h2>
 
         <ul>
             {% for rule in chosenRules %}
@@ -40,6 +46,7 @@
             There are/is {{ num_all_rules }} existing rule(s).
             To add more rules, you should go to the linguistics tab.
         </p>
+{% comment %}
 
         <table class="table table-condensed">
 
@@ -65,6 +72,7 @@
 
          </table>
 
+{% endcomment %}
 
               {% comment %}
                 <div class="col-lg-6">
@@ -92,17 +100,16 @@
             {% endcomment %}
 
 
-    </div>
-
-    <br>
-    <br>
-    <br>
-
-    Todo:
-    - save all checked ones
-    - precheck already checked ones
 
 
 
+
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create" />
+    </form>
+
+
+ </div>
 {% endblock content %}
 
