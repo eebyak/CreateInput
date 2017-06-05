@@ -1,0 +1,51 @@
+
+{% extends 'Wordout/base.html' %}
+
+
+
+{% block content %}
+
+    <div class="post">
+
+
+        <h1> Association: </h1>
+
+<p>
+    Here you will associate gametypes with linguistic rules
+</p>
+
+
+
+
+<table class="table table-condensed">
+
+
+    <tbody>
+
+    {%  for gametype in gametypes %}
+        <tr>
+            <td>
+                {{ gametype.name }}
+            </td>
+            <td>
+                {{ gametype.description }}
+                {{ games }}
+            </td>
+            <td>
+                <a href="{% url 'wordout_add' pk=gametype.pk %}"><span class='glyphicon glyphicon-link'></span></a>
+            </td>
+        </tr>
+    {%  endfor %}
+
+    </tbody>
+
+
+</table>
+
+
+
+
+    </div>
+
+{% endblock content %}
+

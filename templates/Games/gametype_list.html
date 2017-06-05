@@ -3,6 +3,7 @@
 
 {% block content %}
 
+    <a href="{% url 'gametype_new'%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 
 
     <h2>Gametype Listing: </h2>
@@ -28,6 +29,9 @@
             </td>
             <td>
                 <a href="{% url 'gametype_edit' pk=type.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+            <td>
+                <a href="{% url 'gametype_delete' pk=type.pk %}"><span class='glyphicon glyphicon-trash'></span></a>
             </td>
         </tr>
     {%  endfor %}

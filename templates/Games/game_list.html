@@ -2,6 +2,7 @@
 
 {% block content %}
 
+    <a href="{% url 'game_new'%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 
 
     <h2>Game Listing: </h2>
@@ -27,6 +28,9 @@
             </td>
             <td>
                 <a href="{% url 'game_edit' pk=game.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+            <td>
+                <a href="{% url 'game_delete' pk=game.pk %}"><span class='glyphicon glyphicon-trash'></span></a>
             </td>
         </tr>
     {%  endfor %}

@@ -2,8 +2,9 @@
 from __future__ import unicode_literals
 
 import sys
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 
 # Create your views here.
 from Linguistics.forms import linguisticsQForm, linguisticsRForm
@@ -51,9 +52,27 @@ def linguistics_edit(request, pk):
     return render(request, 'Linguistics/linguistics_edit.html',{'form': form, 'rule': rule})
 
 
+def linguistics_new(request):
+    if request.method == "POST":
+        form = linguisticsRForm(request.POST)
+        if form.is_valid():
+            rule = form.save(commit=False)
+            rule.save()
+            print >> sys.stderr, "saved rule: ", rule.name
+            return redirect('linguistics_detail', pk=rule.pk)
+    else:
+        form = linguisticsRForm()
 
-def linguistics_new(request,pk):
-    form = linguisticsRForm()
-    return render(request, 'Linguistics/linguistics_new.html')
+    return render(request, 'Linguistics/linguistics_edit.html', {'form': form})
 
 
+def linguistics_delete(request,pk):
+    try:
+        rule = LinguisticRule.objects.get(pk=pk)
+    except LinguisticRule.DoesNotExist:
+        messages.warning(request, 'This rule no longer exists.')
+        return redirect('linguistics_list')
+    else:
+        rule.delete()
+
+    return redirect('linguistics_list')

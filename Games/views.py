@@ -2,8 +2,9 @@
 from __future__ import unicode_literals
 
 import sys
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 
 # Create your views here.
 from Games.forms import gameForm, gametypeForm
@@ -89,11 +90,55 @@ def gametype_edit(request, pk):
     return render(request, 'Games/gametype_edit.html',{'form': form, 'gametype': gametype})
 
 
-def game_new(request,pk):
-    form = gameForm()
-    return render(request, 'Games/game_new.html')
+
+def game_new(request):
+    if request.method == "POST":
+        form = gameForm(request.POST)
+        if form.is_valid():
+            game = form.save(commit=False)
+            game.save()
+            print >> sys.stderr, "saved rule: ", game.name
+            return redirect('game_detail', pk=game.pk)
+    else:
+        form = gameForm()
+
+    return render(request, 'Games/game_edit.html', {'form': form})
 
 
-def gametype_new(request,pk):
-    form = gametypeForm()
-    return render(request, 'Games/gametype_new.html')
+def game_delete(request,pk):
+    try:
+        game = Game.objects.get(pk=pk)
+    except Game.DoesNotExist:
+        messages.warning(request, 'This game no longer exists.')
+        return redirect('game_list')
+    else:
+        game.delete()
+
+    return redirect('game_list')
+
+
+def gametype_new(request):
+    if request.method == "POST":
+        form = gametypeForm(request.POST)
+        if form.is_valid():
+            gametype = form.save(commit=False)
+            gametype.save()
+            print >> sys.stderr, "saved gametype: ", gametype.name
+            return redirect('gametype_detail', pk=gametype.pk)
+    else:
+        form = gametypeForm()
+
+    return render(request, 'Games/gametype_edit.html', {'form': form})
+
+
+def gametype_delete(request,pk):
+    try:
+        gametype = GameType.objects.get(pk=pk)
+    except GameType.DoesNotExist:
+        messages.warning(request, 'This game no longer exists.')
+        return redirect('gametype_list')
+    else:
+        gametype.delete()
+
+    return redirect('gametype_list')
+

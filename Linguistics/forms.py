@@ -15,6 +15,10 @@ class linguisticsRForm(forms.ModelForm):
         fields = (
             'name',
             'description',
+            'word',
+            'gr',
+            'ph',
+            'CVC'
         )
 
 

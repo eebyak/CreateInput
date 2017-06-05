@@ -1,0 +1,108 @@
+
+{% extends 'Wordout/base.html' %}
+
+
+
+{% block content %}
+
+    <div class="post">
+
+
+        <h1> Add linguistic rules to this type of game </h1>
+        <h2> Game Type: "{{ gametype.name }}"</h2>
+
+        <h3>Description</h3>
+        <p>
+            {{ gametype.description }}
+        </p>
+
+        <h3>Games in the category are: </h3>
+        <ul>
+            {% for game in games %}
+                <li>{{ game }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Current rules that are associated: </h3>
+        <p>There are/is currently {{ num_chosen_rules }} rule(s) associated to this type of game. </p>
+
+        <h3> Choose all that apply. </h3>
+
+        <ul>
+            {% for rule in chosenRules %}
+                <li>{{ rule.name }}</li>
+            {% endfor %}
+        </ul>
+
+
+
+        <p>
+            There are/is {{ num_all_rules }} existing rule(s).
+            To add more rules, you should go to the linguistics tab.
+        </p>
+
+        <table class="table table-condensed">
+
+
+            <tbody>
+
+
+            {% for rule in allRules %}
+                <tr>
+                    <td>
+                        <span class="">
+                            <input type="checkbox" aria-label="...">
+                        </span>
+                    </td>
+                    <td>
+                        {{ rule.name }}
+                    </td>
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+
+         </table>
+
+
+              {% comment %}
+                <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" aria-label="...">
+                    </span>
+                    {{ rule.name }}
+                    <input type="text" class="form-control" aria-label="...">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            {% endcomment %}
+
+
+
+            {% comment %}
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="radio" aria-label="...">
+                    </span>
+                    <input type="text" class="form-control" aria-label="...">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            {% endcomment %}
+
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    Todo:
+    - save all checked ones
+    - precheck already checked ones
+
+
+
+{% endblock content %}
+

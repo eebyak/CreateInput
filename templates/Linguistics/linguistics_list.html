@@ -3,10 +3,12 @@
 {% block content %}
 
 
+    <a href="{% url 'linguistics_new'%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
 
     <h2>Rules Listing: </h2>
 
-{#        <a href="{% url 'game_edit' pk=game.id %}" class="top-menu"><span class="glyphicon glyphicons-edit"></span></a>#}
+{#        <a href="{% url 'linguistics_new' %}" class="top-menu"><span class="glyphicon glyphicons-plus"></span></a>#}
 
 
 
@@ -28,6 +30,17 @@
             <td>
                 <a href="{% url 'linguistics_edit' pk=rule.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
             </td>
+            <td>
+                <a href="{% url 'linguistics_delete' pk=rule.pk %}"><span class='glyphicon glyphicon-trash'></span></a>
+            </td>
+        </tr>
+        <tr>
+        <td></td>
+        <td>
+            Word: {{ rule.word }}, GR: {{ rule.gr }}, PH: {{ rule.ph }}, CVC: {{ rule.CVC }}
+        </td>
+        <td></td>
+        <td></td>
         </tr>
     {%  endfor %}
 
