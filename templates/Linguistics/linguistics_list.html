@@ -1,0 +1,44 @@
+{% extends 'Linguistics/base.html' %}
+
+{% block content %}
+
+
+
+    <h2>Rules Listing: </h2>
+
+{#        <a href="{% url 'game_edit' pk=game.id %}" class="top-menu"><span class="glyphicon glyphicons-edit"></span></a>#}
+
+
+
+    <div class="post">
+
+<table class="table table-condensed">
+
+
+    <tbody>
+
+    {%  for rule in rules %}
+        <tr>
+            <td>
+                {{ rule.name }}
+            </td>
+            <td>
+                {{ rule.description }}
+            </td>
+            <td>
+                <a href="{% url 'linguistics_edit' pk=rule.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+        </tr>
+    {%  endfor %}
+
+    </tbody>
+
+
+</table>
+
+    </div>
+
+
+
+{% endblock %}
+

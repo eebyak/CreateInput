@@ -1,0 +1,36 @@
+{% extends 'Linguistics/base.html' %}
+
+{% block content %}
+
+
+
+    <h2>Edit Rule: </h2>
+
+    <div class="post">
+
+        <form method="POST" class="post-form">{% csrf_token %}
+
+
+            <table class="table table-hove">
+                {% comment %}<thead>
+                <tr>
+                    <th>Name</th>
+                    <th><Type</th>
+                </tr>
+                </thead>{% endcomment %}
+
+                <tbody>
+                {{ form.as_table }}
+                </tbody>
+
+            </table>
+
+
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+
+    </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+{% extends 'Linguistics/base.html' %}
+
+
+{% block content %}
+
+    {% comment %}<script>
+        $(document).ready(function() {
+            alert( "ready!" );
+        });
+    </script>{% endcomment %}
+
+    <div class="post">
+        <h1>Rule Details: </h1>
+
+        <h2>
+            <a href="{% url 'linguistics_edit' pk=rule.id %}"><span class='glyphicon glyphicon-edit'></span></a>
+            {{ rule.name }}
+        </h2>
+        <h3>
+            {{ rule.description }}
+        </h3>
+    </div>
+
+{% endblock %}
+
+

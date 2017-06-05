@@ -13,8 +13,8 @@ from Games.models import Game, GameType
 def index(request):
     return render(request, 'Games/index.html')
 
-def gametype_detail(request, pk):
-    return render(request, 'Games/gametype_detail.html')
+# def gametype_detail(request, pk):
+#     return render(request, 'Games/gametype_detail.html')
 
 def gametype_detail(request, pk):
     try:
