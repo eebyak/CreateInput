@@ -1,6 +1,5 @@
 from django import forms
 from Database.models import Entry
-from splitjson.widgets import SplitJSONWidget
 from django.forms import ModelForm
 
 from Wordout.models import AssociationTable
