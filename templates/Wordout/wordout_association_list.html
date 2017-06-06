@@ -1,0 +1,49 @@
+{% extends 'Wordout/base.html' %}
+
+{% block content %}
+
+    <a href="{% url 'wordout_associate' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
+
+    <h2> Listing of Association: </h2>
+
+{#        <a href="{% url 'game_edit' pk=game.id %}" class="top-menu"><span class="glyphicon glyphicons-edit"></span></a>#}
+
+
+
+    <div class="post">
+
+<table class="table table-condensed">
+
+
+    <tbody>
+
+    {%  for association in associations %}
+        <tr>
+            <td>
+                {{ association.name }}
+            </td>
+            <td>
+                {{ association.question }}
+            </td>
+            <td>
+{#                <a href="{% url 'game_edit' pk=game.pk %}"><span class='glyphicon glyphicon-edit'></span></a>#}
+            </td>
+            <td>
+{#                <a href="{% url 'game_delete' pk=game.pk %}"><span class='glyphicon glyphicon-trash'></span></a>#}
+            </td>
+        </tr>
+    {%  endfor %}
+
+    </tbody>
+
+
+</table>
+
+    </div>
+
+    <button type="button" class="btn btn-success">Save all as JSON (todo)</button>
+
+
+{% endblock %}
+

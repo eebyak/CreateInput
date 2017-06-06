@@ -1,0 +1,164 @@
+
+{% extends 'Wordout/base.html' %}
+
+
+
+{% block content %}
+
+    <div class="post">
+
+
+        <h2> Now its time to add the distractor </h2>
+        <ul>
+        <li> Game Type: "{{ gametype.name }}" <span class='glyphicon glyphicon-check' style="color:greenyellow"></span></li>
+        <li> Rule: "{{ rule.name }}" <span class='glyphicon glyphicon-check' style="color:greenyellow"></span></li>
+        <li> Distractor: "..." <span class='glyphicon glyphicon-check' style="color:greenyellow"></span></li>
+        <li> Question(s): "..." <span class='glyphicon glyphicon-cog' style="color:deepskyblue"></span></li>
+        </ul>
+
+
+        <h2>Rule Details: </h2>
+        <p> Inputwords are formed according to this rule. </p>
+
+<table class="table table-condensed" width="200">
+    <tbody>
+        <tr>
+            <td>Word:</td>
+            <td>
+                {{ rule.word }}
+            </td>
+        </tr>
+        <tr>
+            <td>Graphemes</td>
+            <td>
+                {{ rule.gr }}
+            </td>
+        </tr>
+        <tr>
+            <td>Phonemes</td>
+            <td>
+                {{ rule.ph }}
+            </td>
+        </tr>
+        <tr>
+            <td>C-V-C Structure</td>
+            <td>
+                {{ rule.CVC }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+        <h2>Words that follow this rules: </h2>
+    <p>
+        If you don't like this go back (using browser backbutton to pick another rule.
+        If you need to create another rule, use another window on this app and create it there.
+        <br><br>
+        {{ num_entries }} entries in dictionary match the rules above (displaying max. 5).
+    </p>
+        <table class="table table-condensed">
+            <tbody>
+
+            {%  for entry in entries %}
+                <tr>
+                    <td>
+                        {{ entry.word }}
+                    </td>
+                    <td>
+                        {{ entry.ph }}
+                    </td>
+                    <td>
+                        {{ entry.gr }}
+                    </td>
+                    <td>
+                        {{ entry.CVC }}
+                    </td>
+                </tr>
+            {%  endfor %}
+
+            </tbody>
+        </table>
+
+
+    <h2>Distractor Details: </h2>
+        <p> Destructors are formed according to this rule. </p>
+
+<table class="table table-condensed" width="200">
+    <tbody>
+        <tr>
+            <td>Word:</td>
+            <td>
+                {{ distractor.word }}
+            </td>
+        </tr>
+        <tr>
+            <td>Graphemes</td>
+            <td>
+                {{ distractor.gr }}
+            </td>
+        </tr>
+        <tr>
+            <td>Phonemes</td>
+            <td>
+                {{ distractor.ph }}
+            </td>
+        </tr>
+        <tr>
+            <td>C-V-C Structure</td>
+            <td>
+                {{ distractor.CVC }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+        <h2>Distractor words that follow this rules: </h2>
+    <p>
+        If you don't like this go back (using browser backbutton to pick another rule.
+        If you need to create another rule, use another window on this app and create it there.
+        <br><br>
+        {{ num_distractors }} entries in dictionary match the rules above (displaying max. 5).
+    </p>
+        <table class="table table-condensed">
+            <tbody>
+
+            {%  for d in distractors %}
+                <tr>
+                    <td>
+                        {{ d.word }}
+                    </td>
+                    <td>
+                        {{ d.ph }}
+                    </td>
+                    <td>
+                        {{ d.gr }}
+                    </td>
+                    <td>
+                        {{ d.CVC }}
+                    </td>
+                </tr>
+            {%  endfor %}
+
+            </tbody>
+        </table>
+
+
+
+        <h2>Which question should represent this problems set: </h2>
+    <p>We might consider generic questions here (?).</p>
+    <p>Add Level as attribute to association? </p>
+        <form action="" method="post">{% csrf_token %}
+            Give this association a meaningful name:<br>
+            <input type="text" name="name" value="" size="50"> <br>
+            Formulate a question:<br>
+            <input type="text" name="question" value="" size="100"><br>
+            <br>
+            <input type="submit" value="Create" />
+        </form>
+
+
+    </div>
+
+{% endblock content %}

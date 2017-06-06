@@ -3,7 +3,7 @@ from Database.models import Entry
 from splitjson.widgets import SplitJSONWidget
 from django.forms import ModelForm
 
-from Linguistics.models import LinguisticQuestion, LinguisticRule
+from Linguistics.models import  LinguisticRule
 
 
 
@@ -21,16 +21,5 @@ class linguisticsRForm(forms.ModelForm):
             'CVC'
         )
 
-
-
-
-class linguisticsQForm(forms.ModelForm):
-
-    class Meta:
-        model = LinguisticQuestion
-        fields = (
-            'name',
-            'question',
-        )
 
 

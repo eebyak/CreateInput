@@ -3,16 +3,20 @@ from Database.models import Entry
 from splitjson.widgets import SplitJSONWidget
 from django.forms import ModelForm
 
+from Wordout.models import AssociationTable
 from Games.models import Game, GameType
-from Linguistics.models import LinguisticRule, LinguisticQuestion
+from Linguistics.models import LinguisticRule
 
 class associateForm(forms.ModelForm):
 
     class Meta:
-        model = Game
+        model = AssociationTable
         fields = (
             'name',
-            'type',
+            'question',
+            # 'gameType',
+            # 'linguistic_rule_input',
+            # 'linguistic_rule_output'
         )
 
 

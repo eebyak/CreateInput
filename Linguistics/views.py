@@ -7,8 +7,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 
 # Create your views here.
-from Linguistics.forms import linguisticsQForm, linguisticsRForm
-from Linguistics.models import LinguisticRule, LinguisticQuestion
+from Linguistics.forms import linguisticsRForm
+from Linguistics.models import LinguisticRule
 
 
 def index(request):

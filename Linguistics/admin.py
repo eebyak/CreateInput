@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 from Database.admin import EntryInline
-from Linguistics.models import LinguisticRule, LinguisticQuestion
+from Linguistics.models import LinguisticRule
 
 
 # Register your models here.

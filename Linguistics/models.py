@@ -19,12 +19,3 @@ class LinguisticRule(models.Model):
     def __str__(self):
        return self.name
 
-
-class LinguisticQuestion(models.Model):
-    name = models.CharField(max_length=200,default='', null=True)
-    question = models.CharField(max_length=200,default='', null=True)
-
-    def __str__(self):
-       return self.name
-
-

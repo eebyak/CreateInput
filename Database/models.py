@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import json
 
+import sys
 from django.db import models
 
 
@@ -34,3 +35,25 @@ class Entry(models.Model):
         # d = self.__dict__
         # jsonarray = json.dumps(d)
         # return jsonarray
+
+
+def get_entries_that_match(instance):
+    entries = []
+    word = instance.word
+    ph = instance.ph
+    gr = instance.gr
+    CVC = instance.CVC
+
+    print >> sys.stderr, word, ph, gr, CVC
+
+    # check for dont care otherwiese, pick descired CVC structures
+    if (CVC != '*'):
+        entries = Entry.objects.filter(CVC=CVC)
+
+    # s1 = 'abc def ghi'
+    # s2 = 'def ghi abc'
+    # set1 = set(s1.split(' '))
+    # set2 = set(s2.split(' '))
+    # print set1 == set2
+
+    return(entries)

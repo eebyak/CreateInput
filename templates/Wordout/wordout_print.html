@@ -11,10 +11,83 @@
     <h1> Print Wordlist: </h1>
 
     <p>
-        You may write out the word list into a file.
+        You may write out this association and the corresponding word list into a file.
+
+
+<table class="table table-condensed" width="200">
+    <tbody>
+        <tr>
+            <td>Name:</td>
+            <td>
+                {{ association.name }}
+            </td>
+        </tr>
+        <tr>
+            <td>Question: </td>
+            <td>
+                {{ association.question }}
+            </td>
+        </tr>
+        <tr>
+            <td>Game Type: </td>
+            <td>
+                {{ association.gameType.name }}
+            </td>
+        </tr>
+        <tr>
+            <td>Rule for Target: </td>
+            <td>
+                {{ association.linguistic_rule_input.name }}
+            </td>
+        </tr>
+        <tr>
+            <td>Rule for Distractors: </td>
+            <td>
+                {{ association.linguistic_rule_output.name }}
+            </td>
+        </tr>
+
+    </tbody>
+        <tfoot>
+
+        </tfoot>
+</table>
+
     </p>
 
+
+
+
+<table class="table" width="10">
+    <thead>
+    <tr>
+        <td>Target</td>
+        <td>Distractors</td>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>
+                {% for e in entries %}
+                    {{ e.word }} <br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for d in distractors %}
+                    {{ d.word }} <br>
+                {% endfor %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
     </div>
+
+
+    <button type="button" class="btn btn-success">Save this as JSON (todo)</button>
+
 
 {% endblock content %}
 
