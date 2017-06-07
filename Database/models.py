@@ -19,11 +19,15 @@ class Dictionary (models.Model):
 
 
 class Entry(models.Model):
-    dictionary = models.ForeignKey(Dictionary)
-    word = models.CharField(max_length=200,default='')
-    CVC = models.CharField(max_length=200,default='')
-    gr = models.CharField(max_length=200,default='')
-    ph = models.CharField(max_length=200,default='')
+    dictionary = models.ForeignKey(Dictionary,default='',null=True)
+    word = models.CharField(max_length=200,default='',null=True)
+    CVC = models.CharField(max_length=200,default='',null=True)
+    gr = models.CharField(max_length=200,default='',null=True)
+    ph = models.CharField(max_length=200,default='',null=True)
+
+    # def __init__(self,dictionary):
+    #     super.__init__()
+    #     self.dictionary = dictionary
 
     def __str__(self):
         return self.word

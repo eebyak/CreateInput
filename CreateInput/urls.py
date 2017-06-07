@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^Wordout/', include('Wordout.urls')),
     url(r'^Games/',include('Games.urls')),
     url(r'^Linguistics/',include('Linguistics.urls')),
+    url(r'^Levels/', include('Levels.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 

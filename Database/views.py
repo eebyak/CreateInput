@@ -87,19 +87,26 @@ def entry_list(request):
         #d.save()
 
         print >> sys.stderr, "first item: ", data[0]
-        print >> sys.stderr, "first dictionary: ", data[0]['dictionary']
-        (d,created) = Dictionary.objects.get_or_create(id = data[0]['dictionary'])
+        #print >> sys.stderr, "first dictionary: ", data[0]['dictionary']
+        #(d,created) = Dictionary.objects.get_or_create(id = data[0]['dictionary'])
+        all_dicts = Dictionary.objects.all()
+        for d in all_dicts:
+            d.delete()
+
+        d = Dictionary.objects.create()
         print >> sys.stderr, "dictionary name: ", d.language
         print >> sys.stderr, "Needed to create a new dictionary?: ", created
 
         for item in data:
             print >> sys.stderr, "item: ", item
-            print >> sys.stderr, "item.id: ", item['id']
-            (e,created) = Entry.objects.get_or_create(id = item['id'],dictionary=d)
-            e.__setattr__('word',item['word'])
-            e.__setattr__('gr',item['gr'])
-            e.__setattr__('ph',item['ph'])
-            e.__setattr__('CVC',item['CVC'])
+            #print >> sys.stderr, "item.id: ", item['id']
+            # (e,created) = Entry.objects.get_or_create(id = item['id'],dictionary=d)
+            e = Entry.objects.create()
+            e.dictionary=d
+            e.__setattr__('word',item['Word'])
+            e.__setattr__('gr',item['Word'])
+            e.__setattr__('ph',item['g2p'])
+            e.__setattr__('CVC',item['CV form'])
             e.save()
             print >> sys.stderr, "created: ", created
             created_total += created

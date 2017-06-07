@@ -1,0 +1,174 @@
+
+
+
+{% extends 'Levels/base.html' %}
+
+
+
+{% block content %}
+
+
+{#    <a href="{% url 'level_new'%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>#}
+
+    {% if messages %}
+        <ul class="messages">
+            {% for msg in messages %}
+                <li>
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                        {{msg.message}}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+<h2>Linguistics Rules are here.</h2>
+
+    <div class="post">
+
+
+
+        <p>
+            Construct Levels of Difficulty here at level of
+            GR, CVC, Word.
+        </p>
+
+
+
+     </div>
+
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        Letters</a> &emsp;
+              <a href="{% url 'level_new' id=1 %}" class="top-menu" ><span class="glyphicon glyphicon-plus" style="color:blue"></span></a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+
+
+
+<table class="table table-condensed">
+
+
+    <tbody>
+
+    {%  for level in letter_levels %}
+        <tr>
+            <td>
+                {{ level.name }}
+            </td>
+            <td>
+                {{ level.type }}
+            </td>
+            <td>
+                {{ level.list }}
+            </td>
+            <td>
+                {{ level.level }}
+            </td>
+            <td>
+                <a href="{% url 'level_edit' pk=level.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+            <td>
+                <a href="{% url 'level_delete' pk=level.pk %}"><span class='glyphicon glyphicon-trash'></span></a>
+            </td>
+        </tr>
+
+    {%  endfor %}
+
+    </tbody>
+
+
+</table>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        CVC-structures</a> &emsp;
+          <a href="{% url 'level_new' id=2 %}" class="top-menu" >add<span class="glyphicon glyphicon-plus" style="color:blue"></span></a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">
+
+
+
+
+<table class="table table-condensed">
+
+
+    <tbody>
+
+    {%  for clevel in CVC_levels %}
+        <tr>
+            <td>
+                {{ clevel.name }}
+            </td>
+            <td>
+                {{ clevel.type }}
+            </td>
+            <td>
+                {{ clevel.list }}
+            </td>
+            <td>
+                {{ clevel.level }}
+            </td>
+            <td>
+                <a href="{% url 'level_edit' pk=clevel.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+            <td>
+                <a href="{% url 'level_delete' pk=clevel.pk %}">del<span class='glyphicon glyphicon-trash'></span></a>
+            </td>
+        </tr>
+
+    {%  endfor %}
+
+    </tbody>
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        Something else</a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.</div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
