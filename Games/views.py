@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import sys
+import logging
+
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -10,7 +12,9 @@ from django.contrib import messages
 from Games.forms import gameForm, gametypeForm
 from Games.models import Game, GameType
 
+logging.basicConfig(format='%(message)s')
 
+#    print >> sys.stderr, "item: ", item
 def index(request):
     return render(request, 'Games/index.html')
 
@@ -22,7 +26,7 @@ def gametype_detail(request, pk):
         gametype = GameType.objects.get(id=pk)
     except GameType.DoesNotExist:
         raise Http404("Gametype does not exist")
-    print >> sys.stderr, gametype
+    #print >> sys.stderr, gametype
     return render(request, 'Games/gametype_detail.html', {'gametype': gametype})
 
 def game_detail(request, pk):
@@ -30,7 +34,7 @@ def game_detail(request, pk):
         game = Game.objects.get(id=pk)
     except Game.DoesNotExist:
         raise Http404("Game does not exist")
-    print >> sys.stderr, game
+    #print >> sys.stderr, game
     return render(request, 'Games/game_detail.html', {'game': game})
 
 def game_list(request):
@@ -64,7 +68,7 @@ def game_edit(request, pk):
         if form.is_valid():
             game = form.save(commit=False)
             game.save()
-            print sys.stderr, game.name, game.pk
+            #print sys.stderr, game.name, game.pk
             return redirect('game_detail', pk=game.pk)
     else:
         form=gameForm(instance=game)
@@ -82,7 +86,7 @@ def gametype_edit(request, pk):
         if form.is_valid():
             gametype = form.save(commit=False)
             gametype.save()
-            print sys.stderr, gametype.name, gametype.pk
+            #print sys.stderr, gametype.name, gametype.pk
             return redirect('gametype_detail', pk=gametype.pk)
     else:
         form=gametypeForm(instance=gametype)
@@ -123,7 +127,7 @@ def gametype_new(request):
         if form.is_valid():
             gametype = form.save(commit=False)
             gametype.save()
-            print >> sys.stderr, "saved gametype: ", gametype.name
+            #print >> sys.stderr, "saved gametype: ", gametype.name
             return redirect('gametype_detail', pk=gametype.pk)
     else:
         form = gametypeForm()

@@ -29,7 +29,7 @@ class LetterLevels(Level):
 
     def check_level(self,letter):
         target = self.list.split()
-        print >> sys.stderr, target
+        #print >> sys.stderr, target
         if letter in target:
             return True
 

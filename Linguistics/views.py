@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import copy
-
+import logging
 import sys
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -11,6 +11,8 @@ from django.contrib import messages
 from Linguistics.forms import linguisticsRForm
 from Linguistics.models import LinguisticRule
 from Database.models import Dictionary, Entry, get_entries_that_match
+
+logging.basicConfig(format='%(message)s')
 
 
 def index(request):
@@ -22,7 +24,7 @@ def linguistics_detail(request, pk):
         rule = LinguisticRule.objects.get(id=pk)
     except LinguisticRule.DoesNotExist:
         raise Http404("Rule does not exist")
-    print >> sys.stderr, rule
+    #print >> sys.stderr, rule
     return render(request, 'Linguistics/linguistics_detail.html', {'rule': rule})
 
 
@@ -46,7 +48,7 @@ def linguistics_edit(request, pk):
         if form.is_valid():
             rule = form.save(commit=False)
             rule.save()
-            print sys.stderr, rule.name, rule.pk
+            #print sys.stderr, rule.name, rule.pk
             return redirect('linguistics_detail', pk=rule.pk)
     else:
         form=linguisticsRForm(instance=rule)
@@ -60,7 +62,7 @@ def linguistics_new(request):
         if form.is_valid():
             rule = form.save(commit=False)
             rule.save()
-            print >> sys.stderr, "saved rule: ", rule.name
+            #print >> sys.stderr, "saved rule: ", rule.name
             return redirect('linguistics_detail', pk=rule.pk)
     else:
         form = linguisticsRForm()
@@ -78,8 +80,8 @@ def linguistics_duplicate(request,pk):
     else:
         rule = LinguisticRule.objects.get_or_create(pk=pk)[0]
         copy_rule = copy.copy(rule)
-        print >> sys.stderr, "NEW name: ", copy_rule.name
-        print >> sys.stderr, "NEW descrition ", copy_rule.description
+        #print >> sys.stderr, "NEW name: ", copy_rule.name
+        #print >> sys.stderr, "NEW descrition ", copy_rule.description
         copy_rule.pk = None
         copy_rule.name = copy_rule.name + " (copy)"
         # copy_rule.save()
@@ -117,7 +119,7 @@ def linguistics_Rulelist(request,pk):
     rule = LinguisticRule.objects.get(pk=pk)
     entries, message = get_entries_that_match(instance=rule)
     num_entries = len(entries)
-    print >> sys.stderr, num_entries
+    #print >> sys.stderr, num_entries
     if (message != ""): messages.warning(request, message)
 
     return render(request, 'Linguistics/linguistics_Rulelist.html',

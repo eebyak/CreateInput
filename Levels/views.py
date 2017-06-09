@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import sys
+import logging
 
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -11,6 +12,7 @@ from Levels.forms import levelForm, letterForm, CVCForm
 from Database.models import Entry, Dictionary
 from django.contrib import messages
 
+logging.basicConfig(format='%(message)s')
 
 # Create your views here.
 
@@ -21,7 +23,7 @@ def index(request):
 def level_list(request):
     letter_levels = Level.objects.filter(type='letter').order_by('level')
     CVC_levels = Level.objects.filter(type='CVC').order_by('level')
-    print >> sys.stderr, CVC_levels
+    #print >> sys.stderr, CVC_levels
     return render(request, 'Levels/level_list.html',
                   {'letter_levels': letter_levels, 'CVC_levels': CVC_levels}
                   )
@@ -32,12 +34,12 @@ def level_detail(request,pk):
         level = Level.objects.get(id=pk)
     except Level.DoesNotExist:
         raise Http404("Rule does not exist")
-    print >> sys.stderr, level
+    #print >> sys.stderr, level
     return render(request, 'Levels/level_detail.html', {'level': level})
 
 
 def level_edit(request,pk):
-    print >> sys.stderr, "made it to edit"
+    #print >> sys.stderr, "made it to edit"
     try:
         level = get_object_or_404(Level,pk=pk)
     except Level.DoesNotExist:
@@ -48,7 +50,7 @@ def level_edit(request,pk):
         if form.is_valid():
             level = form.save(commit=False)
             level.save()
-            print sys.stderr, level.name, level.pk
+            #print sys.stderr, level.name, level.pk
             return redirect('level_list')
     else:
         form=levelForm(instance=level)
@@ -69,13 +71,13 @@ def level_new(request,id):
             level = form.save(commit=False)
             level.type = type
             level.save()
-            print >> sys.stderr, "saved rule: ", level.name
+            #print >> sys.stderr, "saved rule: ", level.name
             return redirect('level_list')
             # return redirect(request, 'Levels/level_list.html')
     else:
         form = levelForm()
 
-    print >> sys.stderr, form, id
+    #print >> sys.stderr, form, id
     return render(request, 'Levels/level_edit.html', {'form': form})
 
 
@@ -95,7 +97,7 @@ def level_Entrieslist(request,pk):
     level = Level.objects.get(pk=pk)
     key = level.type
     pattern= level.list
-    print >> sys.stderr, key, pattern
+    #print >> sys.stderr, key, pattern
     entries = ()
     d = Dictionary.objects.all().first()
     entries, message = d.find_Matches(key,pattern)

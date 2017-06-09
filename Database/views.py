@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 import json as simplejson
 import sys
+import logging
 
 from django.shortcuts import render_to_response, render, get_object_or_404, redirect
 from django.contrib import messages
@@ -10,10 +11,12 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.forms.models import model_to_dict
 
-from forms import  entryForm
-import constants
+from Database.forms import entryForm
+import Database.constants
 
 from .models import Entry, Dictionary
+
+logging.basicConfig(format='%(message)s')
 
 # Create your views here.
 
@@ -27,7 +30,9 @@ def entry_list2(request):
     entries = []
 
     try:
-        print >> sys.stderr, "FILE: ", contentOfFile
+        #print("FILE:", contentOfFile, file=sys.stderr)
+        # print >> sys.stderr, "FILE: ", contentOfFile
+        logging.info('File: ', contentOfFile)
         data = simplejson.loads(contentOfFile)
     except ValueError:
         # messages.error(request, "Something wrong with JSON format")
@@ -37,17 +42,19 @@ def entry_list2(request):
         return HttpResponseRedirect('/Database/')
     else:
         # contentOfFile.encode('utf-8')
-        print >> sys.stderr, "data: ", data
+        # print >> sys.stderr, "data: ", data
         #d = Dictionary.objects.create(language="test")
         #d.save()
 
         for item in data:
-            print >> sys.stderr, "item: ", item
+            #print >> sys.stderr, "item: ", item
+            logging.info('item: ', item)
 #            print >> sys.stderr, item['word']
             e = Entry.objects.create(dictionary=d)
 
             for key in item:
-                print >> sys.stderr, key, ": ", item[key]
+                #print >> sys.stderr, key, ": ", item[key]
+                logging.info('key: ', item[key])
                 if (key == 'database'):
                     d = Entry.objects.get_or_create(pk=item[key])
                     e.__setattr__(key,d)
@@ -56,9 +63,11 @@ def entry_list2(request):
             e.get_HFW()
             e.save()
 
-            print >> sys.stderr, e.word
+            #print >> sys.stderr, e.word
+            logging.info( e.word)
             e.refresh_from_db()
-            print >> sys.stderr, e.get_entry()
+            #print >> sys.stderr, e.get_entry()
+            logging.info(e.get_entry())
             entries = Entry.objects.filter(dictionary__language='test')
 
         return render(request, 'Database/entry_list.html', {'file': file, 'entries': entries, 'form': form, 'id': d.pk})
@@ -82,11 +91,13 @@ def entry_list(request):
         return HttpResponseRedirect('/Database/')
     else:
         # contentOfFile.encode('utf-8')
-        print >> sys.stderr, "data: ", data
+        #print >> sys.stderr, "data: ", data
+        logging.info('data:',data)
         #d = Dictionary.objects.create(language="test")
         #d.save()
 
-        print >> sys.stderr, "first item: ", data[0]
+        #print >> sys.stderr, "first item: ", data[0]
+        logging.info("first item: ", data[0])
         #print >> sys.stderr, "first dictionary: ", data[0]['dictionary']
         #(d,created) = Dictionary.objects.get_or_create(id = data[0]['dictionary'])
         all_dicts = Dictionary.objects.all()
@@ -94,11 +105,14 @@ def entry_list(request):
             d.delete()
 
         d = Dictionary.objects.create()
-        print >> sys.stderr, "dictionary name: ", d.language
-        print >> sys.stderr, "Needed to create a new dictionary?: ", created
+        #print >> sys.stderr, "dictionary name: ", d.language
+        logging.info("dictionary name: ", d.language)
+        #print >> sys.stderr, "Needed to create a new dictionary?: ", created
+        logging.info("Needed to create a new dictionary?: ", created)
 
         for item in data:
-            print >> sys.stderr, "item: ", item
+            #    print >> sys.stderr, "item: ", item
+            logging.info(sys.stderr, "item: ", item)
             #print >> sys.stderr, "item.id: ", item['id']
             # (e,created) = Entry.objects.get_or_create(id = item['id'],dictionary=d)
             e = Entry.objects.create()
@@ -110,10 +124,10 @@ def entry_list(request):
             e.save()
             e.get_HFW()
             e.save()
-            print >> sys.stderr, "created: ", created
+            #print >> sys.stderr, "created: ", created
             created_total += created
 
-        print >> sys.stderr, "new entries created: ", created_total
+        #print >> sys.stderr, "new entries created: ", created_total
         entries = Entry.objects.filter(dictionary=d.pk)
         #print >> sys.stderr, "Entries: ", entries
         num_entries = len(entries)
@@ -160,7 +174,7 @@ def entry_new(request, pk):
             entry = form.save(commit=False)
             entry.dictionary = Dictionary.objects.get(id=pk)
             entry.save()
-            print >> sys.stderr, "saved word: ", entry.word
+            #print >> sys.stderr, "saved word: ", entry.word
             return redirect('entry_detail', pk=entry.pk)
     else:
         form = entryForm()
@@ -209,15 +223,15 @@ def write(request):
 
 def write2(request):
     d = Dictionary.objects.filter(language='test')
-    print >> sys.stderr, d
+    #print >> sys.stderr, d
     entries = Entry.objects.filter(dictionary=d[0])
-    print >> sys.stderr, entries[0].pk
+    #print >> sys.stderr, entries[0].pk
     jsonarray = []
     for e in entries:
         m = model_to_dict(e)
-        print >> sys.stderr, m
+        #print >> sys.stderr, m
         jsonarray.append(simplejson.dumps(m))
-        print >> sys.stderr, jsonarray
+        #print >> sys.stderr, jsonarray
     return render(request,'Database/write.html',{'jsonarray': jsonarray})
 
 
