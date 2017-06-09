@@ -1,2 +1,2 @@
-web: gunicorn django.wsgi --log-file -
+web: gunicorn CreateInput.wsgi --log-file -
 
