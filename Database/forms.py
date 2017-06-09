@@ -11,6 +11,8 @@ class entryForm(forms.ModelForm):
             'CVC',
             'gr',
             'ph',
+            'HFW',
+            'dictionary',
         )
 
 
