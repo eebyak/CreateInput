@@ -14,7 +14,7 @@ from django.forms.models import model_to_dict
 from Database.forms import entryForm
 import Database.constants
 
-from .models import Entry, Dictionary
+from Database.models import Entry, Dictionary
 
 logging.basicConfig(format='%(message)s')
 

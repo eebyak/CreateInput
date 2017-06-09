@@ -7,7 +7,7 @@ import sys
 
 from django.contrib import messages
 
-import constants
+from Database.constants import high_freq_L2, high_freq_L1
 from django.db import models
 from Levels.models import Level
 
@@ -84,7 +84,7 @@ class Entry(models.Model):
 
     def get_HFW(self):
         word = self.word.lower()
-        if (word in constants.high_freq_L1) or (word in constants.high_freq_L2):
+        if (word in high_freq_L1) or (word in high_freq_L2):
             self.HFW = True
         else:
             self.HFW = False
@@ -100,7 +100,7 @@ class Entry(models.Model):
 
 def find_letter_match(pre_entries, letters, index):
     entries = list()
-    print sys.stderr, letters
+    #print sys.stderr, letters
     for e in pre_entries:
         spelling = e.gr.split()
         if (spelling[index] in letters):
@@ -121,7 +121,7 @@ def get_entries_that_match(instance):
     pre_entries = list()
 
     # debug
-    print >> sys.stderr, word, ph, gr, CVC
+    #print >> sys.stderr, word, ph, gr, CVC
 
     # FIRST CHECK sublist of words to be used:
     if (word != '*'):
@@ -133,7 +133,7 @@ def get_entries_that_match(instance):
     else:
         pre_entries = Entry.objects.filter(HFW=False)
 
-    print >> sys.stderr, "After word match: ", len(pre_entries)
+    #print >> sys.stderr, "After word match: ", len(pre_entries)
 
     # check for dont care otherwiese, pick descired CVC structures
     if (CVC != '*'):
@@ -145,18 +145,18 @@ def get_entries_that_match(instance):
 
     if (gr != '*'):
         spelling = gr.split()
-        print >> sys.stderr, spelling, gr
+        #print >> sys.stderr, spelling, gr
         for idx, symbol in enumerate(spelling):
-            print >> sys.stderr, type(symbol)
-            print >> sys.stderr, symbol
+            #print >> sys.stderr, type(symbol)
+            #print >> sys.stderr, symbol
             if (symbol != '*'):
                 symbol = int(symbol)
-                print >> sys.stderr, type(symbol)
+                #print >> sys.stderr, type(symbol)
                 try:
                     level = Level.objects.get(pk=symbol)
-                    print >> sys.stderr, level.type, level.list
+                    #print >> sys.stderr, level.type, level.list
                     letters = level.list.split()
-                    print >> sys.stderr, letters
+                    #print >> sys.stderr, letters
                     pre_entries = find_letter_match(pre_entries, letters, idx)
                 except Level.DoesNotExist:
                     message = message + "  You made a mistake with the ID number %d in grapheme description" % symbol
