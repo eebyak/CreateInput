@@ -27,10 +27,40 @@
 
         <h1> Here is the list of input we need from you: </h1>
         <h2> Click on each one and answer the questions. </h2>
-
+<blockquote>
         <p>
             Afterwards, you will be able to test the word generation for each of the games.
+            Look at the source of this page to see a commented out template for the dicationary
+            format.
+            To create this format from the relevant csv file, you can use csv2json.pl that I
+            can give you. The input file must be called input.txt. The outut will be written
+            to output.txt. After producing this file, edit out the last comma after the last
+            curly bracket. Currently, I am using CV, Word only. We need to replace the CV to be
+            correct and add the gr-ph alignemnt.
+
+            Notice:
+            the current version will delete any previous dictionary that you uploaded!
+            You can only work in one language at the moment. So only one country can use one
+            instance of this application at this moment. That can be changed in future.
+
         </p>
+        <small> short overview</small>
+
+</blockquote>
+
+               {% comment %}
+               {
+               "Word": "klangen",
+                "Stem": "klang",
+                "g2p": "['klaN', '@n']",
+                "Num characters": "6",
+                "Num phonemes": "6",
+                "Num syllables": "2",
+                "CV form": "CCVCCVC",
+                "1": "Word freq"
+                }
+                {% endcomment %}
+
 
 
 
@@ -40,6 +70,9 @@
             <p>Click Upload to Use this Model:</p>
             <input type="submit" name="submit" value="Upload" />
         </form>
+
+
+
 
 
      </div>

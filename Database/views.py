@@ -11,9 +11,9 @@ from django.urls import reverse
 from django.forms.models import model_to_dict
 
 from forms import  entryForm
+import constants
 
 from .models import Entry, Dictionary
-
 
 # Create your views here.
 
@@ -53,7 +53,7 @@ def entry_list2(request):
                     e.__setattr__(key,d)
                 else:
                     e.__setattr__(key,item[key])
-
+            e.get_HFW()
             e.save()
 
             print >> sys.stderr, e.word
@@ -104,17 +104,21 @@ def entry_list(request):
             e = Entry.objects.create()
             e.dictionary=d
             e.__setattr__('word',item['Word'])
-            e.__setattr__('gr',item['Word'])
-            e.__setattr__('ph',item['g2p'])
-            e.__setattr__('CVC',item['CV form'])
+            e.__setattr__('gr',item['gr'])
+            e.__setattr__('ph',item['ph'])
+            e.__setattr__('CVC',item['CVC'])
+            e.save()
+            e.get_HFW()
             e.save()
             print >> sys.stderr, "created: ", created
             created_total += created
 
         print >> sys.stderr, "new entries created: ", created_total
         entries = Entry.objects.filter(dictionary=d.pk)
-        print >> sys.stderr, "Entries: ", entries
-        return render(request, 'Database/entry_list.html', {'file': file, 'entries': entries, 'form': form, 'd':d,'id': d.pk})
+        #print >> sys.stderr, "Entries: ", entries
+        num_entries = len(entries)
+        return render(request, 'Database/entry_list.html',
+                      {'file': file, 'entries': entries, 'form': form, 'd':d,'id': d.pk, 'num_entries': num_entries})
 
 
 def post_list(request):
@@ -122,7 +126,19 @@ def post_list(request):
     entries = Entry.objects.filter(dictionary=d)
    # e = entries.first()
    # d = Dictionary.objects.get(pk=e.dictionary.pk)
-    return render(request, 'Database/post_list.html', {'entries': entries, 'd': d, 'id': d.pk})
+    num_entries = len(entries)
+
+    return render(request, 'Database/post_list.html', {'entries': entries, 'd': d, 'id': d.pk, 'num_entries': num_entries})
+
+
+
+def entry_HFWlist(request):
+    d = Dictionary.objects.all().first()
+    entries = Entry.objects.filter(dictionary=d, HFW=True)
+    num_entries = len(entries)
+
+    return render(request, 'Database/entry_HFWlist.html', {'entries': entries, 'd': d, 'id': d.pk, 'num_entries': num_entries})
+
 
 def entry(request):
     data = {"word": "John","CVC": "CVC","gr": "J oh n","ph": "j O n"}

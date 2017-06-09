@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import copy
 
 import sys
 from django.http import HttpResponse, Http404, HttpResponseRedirect
@@ -9,6 +10,7 @@ from django.contrib import messages
 # Create your views here.
 from Linguistics.forms import linguisticsRForm
 from Linguistics.models import LinguisticRule
+from Database.models import Dictionary, Entry, get_entries_that_match
 
 
 def index(request):
@@ -66,6 +68,39 @@ def linguistics_new(request):
     return render(request, 'Linguistics/linguistics_edit.html', {'form': form})
 
 
+def linguistics_duplicate(request,pk):
+    if request.method == "POST":
+        form = linguisticsRForm(request.POST)
+        if form.is_valid():
+            rule = form.save(commit=False)
+            rule.save()
+            return redirect('linguistics_list')
+    else:
+        rule = LinguisticRule.objects.get_or_create(pk=pk)[0]
+        copy_rule = copy.copy(rule)
+        print >> sys.stderr, "NEW name: ", copy_rule.name
+        print >> sys.stderr, "NEW descrition ", copy_rule.description
+        copy_rule.pk = None
+        copy_rule.name = copy_rule.name + " (copy)"
+        # copy_rule.save()
+        # print >> sys.stderr, "NEW KEY", copy_rule.pk
+        # copy_rule.refresh_from_db()
+        # print >> sys.stderr, "NOW: ", copy_rule
+        form = linguisticsRForm(instance=copy_rule)
+
+    return render(request, 'Linguistics/linguistics_edit.html', {'form': form})
+
+    # if request.method == "POST":
+    #     form = linguisticsRForm(request.POST)
+    #     if form.is_valid():
+    #         rule = form.save(commit=False)
+    #         rule.save()
+    #         print >> sys.stderr, "saved rule: ", rule.name
+    #         return redirect('linguistics_detail', pk=rule.pk)
+    # else:
+    #     form = linguisticsRForm()
+
+
 def linguistics_delete(request,pk):
     try:
         rule = LinguisticRule.objects.get(pk=pk)
@@ -76,3 +111,16 @@ def linguistics_delete(request,pk):
         rule.delete()
 
     return redirect('linguistics_list')
+
+
+def linguistics_Rulelist(request,pk):
+    rule = LinguisticRule.objects.get(pk=pk)
+    entries, message = get_entries_that_match(instance=rule)
+    num_entries = len(entries)
+    print >> sys.stderr, num_entries
+    if (message != ""): messages.warning(request, message)
+
+    return render(request, 'Linguistics/linguistics_Rulelist.html',
+                  {'entries': entries, 'num_entries': num_entries, 'rule': rule})
+
+

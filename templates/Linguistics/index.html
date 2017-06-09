@@ -24,14 +24,51 @@
 
     <div class="post">
 
-
+<blockquote>
 
         <p>
             This is were we will collect and define linguistic rules.
+            Words can be selected based on rules that can be written at each of the dictionary
+            entries.
+            For example, I can say use any letter-set (defined in Levels) in certain
+            positions of a word, along with a certain word-shape (2 syllables with short vowel
+            in stressed syllable).
+
+            So, we will use a certain easy (hopefully) language for you to specify the patterns
+            that you want to select from the database. Use the groupings from Levels to specify
+            sets of letters. (Ideally, this should be a drop down menu of the ones you have
+            specified, but I wasn't able to get that to work yet. So just use the id number in
+            the Levels listing for now.
+        </p>
+        <ul>Examples of specifications:
+            <li>
+                words: $W1, $W2, ... *, where $W1 stands for the set of words with ID = 1, 2, ...
+            </li>
+            <li>
+                CVC: just write the sequence you are looking for as CVC, CvC, CVCR... <br>
+                were C, V, R are phonemes. C is consonant, V is a long vowel, v is a short vowel
+                and R refers to the coda of an unstressed syllable with a shwa vowel.
+            </li>
+            <li>
+                Letter sequences: <br>
+                * * * $L1: This means that any letter can happen in any position, but the last one must be in set $L1.<br>
+                L1 L2 L1 L2-t: Here you specify all of the positions.<br>
+                L1 L2 L1 t: Here you specify the letter instead of a set. <br>
+                The above two rules could describe a set of items that and in t and distractors.
+            </li>
+        </ul>
+
+        <p>
+        Once you have figured out what you want to do here and you dont have any mistakes anymore,
+        you can enter the sequences into the graph tool.
+        My experience is that I need to see the wordlist from the distionary in order to see whether
+        I have done the specification well enough to be useful.
+
         </p>
 
+        <small> short overview</small>
 
-
+</blockquote>
      </div>
 
 

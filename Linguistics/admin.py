@@ -16,7 +16,7 @@ class RuleInline(admin.TabularInline):
 class LinguisticRuleAdmin(admin.ModelAdmin):
     fieldsets = [
     (None,
-    {'fields': ['name']}
+    {'fields': ['name','description','word','gr','ph','CVC']}
     ),
                 ]
     # inlines = [RuleInline]

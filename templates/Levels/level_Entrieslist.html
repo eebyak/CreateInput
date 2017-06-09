@@ -1,0 +1,60 @@
+
+{% extends 'Levels/base.html' %}
+
+{% block content %}
+
+    <h2>List of words corresponding to this pattern. </h2>
+
+<blockquote>
+    <p>
+    {{ num_entries }} entries match this rule ({{ level.type }} = {{ level.list }}) in the current dictionary.<br>
+Note the following:
+        <ul>
+    <li>
+        <p class="bg-warning">These will NEVER be selected from HFW.</p>
+
+    If you want to create games with high frequency words, make a separate pattern for it because these will be treated seperately.
+    </li>
+    <li>
+        This list includes all words that form with the pattern that you described.
+        You will notice that there are some letters that you might not want in the first games.
+        This is not defined in Levels. It is defined in linguistic rules.
+        In Linguistic rules section you can say, give me all CVC-type words which use only letters XXX.
+    </li>
+
+</ul>
+
+</p>
+</blockquote>
+
+
+    <table class="table table-condensed">
+
+
+        <tbody>
+
+        {%  for entry in entries %}
+            <tr>
+                <td>
+                    {{ entry.word }}
+                </td>
+                <td>
+                    {{ entry.ph }}
+                </td>
+                <td>
+                    {{ entry.gr }}
+                </td>
+                <td>
+                    {{ entry.CVC }}
+                </td>
+            </tr>
+        {%  endfor %}
+
+        </tbody>
+
+
+        </table>
+
+{% endblock %}
+
+

@@ -61,6 +61,9 @@
     {%  for level in letter_levels %}
         <tr>
             <td>
+                {{ level.pk}}
+            </td>
+            <td>
                 {{ level.name }}
             </td>
             <td>
@@ -74,6 +77,9 @@
             </td>
             <td>
                 <a href="{% url 'level_edit' pk=level.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+            <td>
+                <a href="{% url 'level_Entrieslist' pk=level.pk %}"><span class='glyphicon glyphicon-list'></span></a>
             </td>
             <td>
                 <a href="{% url 'level_delete' pk=level.pk %}"><span class='glyphicon glyphicon-trash'></span></a>
@@ -113,6 +119,9 @@
     {%  for clevel in CVC_levels %}
         <tr>
             <td>
+                {{ clevel.pk }}
+            </td>
+            <td>
                 {{ clevel.name }}
             </td>
             <td>
@@ -126,6 +135,9 @@
             </td>
             <td>
                 <a href="{% url 'level_edit' pk=clevel.pk %}"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+            <td>
+                <a href="{% url 'level_Entrieslist' pk=clevel.pk %}"><span class='glyphicon glyphicon-list'></span></a>
             </td>
             <td>
                 <a href="{% url 'level_delete' pk=clevel.pk %}">del<span class='glyphicon glyphicon-trash'></span></a>

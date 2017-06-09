@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^readit/$', views.readit, name='readit'),
     url(r'^write/$', views.write, name='write'),
     url(r'^post_list/$', views.post_list, name='post_list'),
+    url(r'^entry_HFWlist/$', views.entry_HFWlist, name='entry_HFWlist'),
     url(r'^entry_list/$', views.entry_list, name='entry_list'),
     url(r'^entry/$', views.entry, name='entry'),
     url(r'^$', views.entry_list, name='entry_list'),

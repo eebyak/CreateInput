@@ -19,6 +19,19 @@ class associateForm(forms.ModelForm):
         )
 
 
+class editAssociateForm(forms.ModelForm):
+
+    class Meta:
+        model = AssociationTable
+        fields = (
+            'name',
+            'question',
+            'gameType',
+            'linguistic_rule_input',
+            'linguistic_rule_output'
+        )
+
+
 class rulesForm(forms.Form):
     rules = forms.ModelChoiceField(queryset=LinguisticRule.objects.all().order_by('name'))
 

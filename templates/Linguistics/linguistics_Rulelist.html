@@ -1,0 +1,67 @@
+
+{% extends 'Linguistics/base.html' %}
+
+{% block content %}
+
+    <h2>List of words corresponding to this pattern. </h2>
+
+<blockquote>
+    <p>
+    {{ num_entries }} entries matching this Linguistic Rule ({{ rule.name}}) in the current dictionary.<br>
+    <blockquote>
+    {{ rule.description}} <br>
+    Word Collection: {{ rule.word }}<br>
+    Phonemes: {{ rule.ph }} <br>
+    Graphemes: {{ rule.gr }} <br>
+    CVC: {{ rule.CVC }}
+    <small>description</small>
+    </blockquote>
+    Note the following:
+    <ul>
+        <li>
+            <p class="bg-warning">These will NEVER be selected from HFW.</p>
+            If you want to create games with high frequency words, make a separate pattern
+            for it because these will be treated seperately. Or you can get these by specifying HFW under "words" in rule specification.
+        </li>
+        <li>
+        This list includes all words that form with the pattern that you described.
+        This is the list of words that will be presented within the game as the "same" level, either
+        as target items or as distractors. The rule will be used to choose words. So there should be no mistakes here.
+        This list goes beyond the Levels listing because it combines features at different levels.
+        </li>
+
+    </ul>
+
+</p>
+</blockquote>
+
+
+    <table class="table table-condensed">
+
+
+        <tbody>
+
+        {%  for entry in entries %}
+            <tr>
+                <td>
+                    {{ entry.word }}
+                </td>
+                <td>
+                    {{ entry.ph }}
+                </td>
+                <td>
+                    {{ entry.gr }}
+                </td>
+                <td>
+                    {{ entry.CVC }}
+                </td>
+            </tr>
+        {%  endfor %}
+
+        </tbody>
+
+
+        </table>
+
+{% endblock %}
+

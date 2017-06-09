@@ -5,12 +5,11 @@
 
 
     <a href="{% url 'entry_new' pk=id %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-
-    {{ id }}
+{{ d.language }} ({{ id }}) (At the moment you can only have one dictionary - all old ones just got deleted.)
 
     <h2>Current Listing of Database {{ d.language }}</h2>
 
-
+    {{ num_entries }} entries were uploaded.
     <table class="table table-condensed">
 
 

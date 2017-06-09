@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from Levels.models import WordLevels, CVCLevels, LetterLevels, Level
 
 from Levels.forms import levelForm, letterForm, CVCForm
-
+from Database.models import Entry, Dictionary
 from django.contrib import messages
 
 
@@ -91,3 +91,15 @@ def level_delete(request,pk):
     return redirect('level_list')
 
 
+def level_Entrieslist(request,pk):
+    level = Level.objects.get(pk=pk)
+    key = level.type
+    pattern= level.list
+    print >> sys.stderr, key, pattern
+    entries = ()
+    d = Dictionary.objects.all().first()
+    entries, message = d.find_Matches(key,pattern)
+    num_entries = len(entries)
+    if (message != ""): messages.warning(request, message)
+
+    return render(request, 'Levels/level_Entrieslist.html', {'entries': entries, 'num_entries': num_entries, 'level': level})

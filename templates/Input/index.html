@@ -6,17 +6,24 @@
 {% block content %}
 
     <div class="post">
+
     <h1> This website helps you to organize your linguistic rules, dictionary and games input and output </h1>
+<blockquote>
+    <p>* means that it is implemented. </p>
 
     <h2> Follow the tabs at the top in order to:  </h2>
     <ul>
-    <li> Define Levels for Words, Letters, CVC-structures, etc. </li>
-    <li> Define linguistic rules </li>
-    <li> Upload/Edit/Save current dictionary </li>
-    <li> Define games and their associated linguistic rules </li>
-    <li> Generate input, output and questions for games based on above </li>
+        <li> Upload/Edit/Save current dictionary.* </li>
+        <li> Define Learning Sequences for sets of Words, Letters(*), CVC-structures(*), GR-PH correspondences etc. </li>
+        <li> Define linguistic rules that define sets of words to select from the database. (partial *)
+            You can use variables that refer to the sets defined in the previous step. </li>
+        <li> Define games and game types*. Define required in- and outputs for the games. </li>
+        <li> Associate linguistic rules* with each of the inputs and perhaps outputs as needed. </li>
+        <li> Generate input, output and questions for games based on above.* </li>
     </ul>
+        <small> short overview</small>
 
+</blockquote>
 
 {% comment %}    Afterwards, you will be able to test the word generation for each of the games.
 

@@ -2,16 +2,19 @@
 from __future__ import unicode_literals
 
 import sys
-from django.http import HttpResponse, HttpResponseRedirect
+
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
+from django.http import Http404
 
 from Games.models import Game, GameType
 from Linguistics.models import LinguisticRule
 from Wordout.models import AssociationTable
 from Database.models import Entry, get_entries_that_match
 
-from Wordout.forms import associateForm, rulesForm
+from Wordout.forms import associateForm, rulesForm, editAssociateForm
 from Linguistics.forms import linguisticsRForm
 from Database.forms import entryForm
 
@@ -32,12 +35,13 @@ def wordout_print(request,pk):
     print >> sys.stderr, pk
     association = AssociationTable.objects.get(pk=pk)
     print >> sys.stderr, association
-    entries = []
-    distractors = []
+    entries = list()
+    distractors = list()
     rule = LinguisticRule.objects.get(pk=association.linguistic_rule_input.pk)
     distractor = LinguisticRule.objects.get(pk=association.linguistic_rule_output.pk)
-    entries = get_entries_that_match(rule)
-    distractors = get_entries_that_match(distractor)
+    entries, message1 = get_entries_that_match(rule)
+    distractors, message2 = get_entries_that_match(distractor)
+    messages.warning(request, message1+message2)
     return render(request, 'Wordout/wordout_print.html',
                   {'association': association, 'entries': entries, 'distractors': distractors})
 
@@ -63,12 +67,13 @@ def wordout_add_question(request,rpk,gpk,dpk):
     rform = rulesForm()
     lform = linguisticsRForm(instance=rule)
     wform = entryForm()
-    entries = []
-    entries = get_entries_that_match(instance=rule)
-    num_entries = entries.__len__()
-    distractors = []
-    distractors = get_entries_that_match(instance=distractor)
-    num_distractors = distractors.__len__()
+    entries = list()
+    entries, message1 = get_entries_that_match(instance=rule)
+    num_entries = len(entries)
+    distractors = list()
+    distractors, message2 = get_entries_that_match(instance=distractor)
+    num_distractors = len(distractors)
+    messages.warning(request, message1+message2)
 
     return render(request, 'Wordout/wordout_add_question.html',
                   {'gametype': gametype, 'rule': rule,
@@ -90,9 +95,12 @@ def wordout_add_distractor(request, rpk, gpk):
     rform = rulesForm()
     lform = linguisticsRForm(instance=rule)
     wform = entryForm()
-    entries = []
-    entries = get_entries_that_match(instance=rule)
-    num_entries = entries.__len__()
+    entries = list()
+    entries,message = get_entries_that_match(instance=rule)
+    num_entries = len(entries)
+    messages.warning(request, message)
+
+
     return render(request, 'Wordout/wordout_add_distractor.html',
                   {'gametype': gametype, 'rule': rule,
                    'rform': rform, 'lform': lform,
@@ -107,7 +115,7 @@ def wordout_add(request,pk):
 
     games = Game.objects.filter(type=gametype)
     associations = AssociationTable.objects.filter(gameType=gametype)
-    chosenRules = []
+    chosenRules = list()
     for association in associations.iterator():
         chosenRules.append(association.linguistic_rule_input)
 
@@ -147,3 +155,44 @@ def wordout_add(request,pk):
 def wordout_association_list(request):
     associations = AssociationTable.objects.all()
     return render(request, 'Wordout/wordout_association_list.html',{'associations': associations})
+
+
+
+
+def wordout_delete(request,pk):
+    try:
+        association = AssociationTable.objects.get(pk=pk)
+    except AssociationTable.DoesNotExist:
+        messages.warning(request, 'This level no longer exists.')
+        return redirect('wordout_association_list')
+    else:
+        association.delete()
+
+    return redirect('wordout_association_list')
+
+
+def wordout_edit(request,pk):
+    form = editAssociateForm()
+    print >> sys.stderr, "made it to wordout edit"
+    try:
+        association = get_object_or_404(AssociationTable, pk=pk)
+    except AssociationTable.DoesNotExist:
+        raise Http404("This level does not exist")
+
+    if request.method == "POST":
+        form = editAssociateForm(request.POST, instance=association)
+        if form.is_valid():
+            association = form.save(commit=False)
+            association.save()
+            print sys.stderr, association.name, association.pk
+            return redirect('wordout_association_list')
+    else:
+        form = editAssociateForm(instance=association)
+
+    return render(request, 'Wordout/wordout_edit.html', {'form': form})
+
+
+def wordout_new(request):
+    association = AssociationTable.objects.create()
+    form = editAssociateForm(association)
+    return redirect('wordout_edit', pk=association.pk)
