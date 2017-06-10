@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf.urls.static import static
+from CreateInput import settings
 
 urlpatterns = [
     url(r'', include('Input.urls')),
@@ -25,5 +27,5 @@ urlpatterns = [
     url(r'^Linguistics/',include('Linguistics.urls')),
     url(r'^Levels/', include('Levels.urls')),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
