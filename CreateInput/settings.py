@@ -14,6 +14,9 @@ import os
 import logging
 from django.contrib import messages
 from django.contrib.messages import constants as message_constants
+# from django.core.wsgi import get_wsgi_application
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CreateInput.settings")
+# from whitenoise.django import DjangoWhiteNoise
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -59,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'CreateInput.urls'
@@ -150,8 +154,13 @@ STATIC_URL = '/static/'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+)
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR,  'templates'),
+    # Add to this list all the locations containing your static files
 )
 
 #STATIC_ROOT = ( os.path.join(PROJECT_ROOT, "static"), )
@@ -170,7 +179,6 @@ STATICFILES_FINDERS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 MESSAGE_LEVEL = message_constants.WARNING
